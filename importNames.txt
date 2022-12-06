@@ -1,0 +1,41 @@
+import sys
+
+import math as python_lib_Math
+import math as Math
+from os import path as python_lib_os_Path
+import inspect as python_lib_Inspect
+import sys as python_lib_Sys
+import functools as python_lib_Functools
+try:
+    import msvcrt as python_lib_Msvcrt
+except:
+    pass
+import os as python_lib_Os
+import random as python_lib_Random
+import re as python_lib_Re
+import subprocess as python_lib_Subprocess
+try:
+    import termios as python_lib_Termios
+except:
+    pass
+import time as python_lib_Time
+import timeit as python_lib_Timeit
+import traceback as python_lib_Traceback
+try:
+    import tty as python_lib_Tty
+except:
+    pass
+from datetime import datetime as python_lib_datetime_Datetime
+from datetime import timedelta as python_lib_datetime_Timedelta
+from datetime import tzinfo as python_lib_datetime_Tzinfo
+from datetime import timezone as python_lib_datetime_Timezone
+from io import IOBase as python_lib_io_IOBase
+from io import BufferedIOBase as python_lib_io_BufferedIOBase
+from io import RawIOBase as python_lib_io_RawIOBase
+from io import FileIO as python_lib_io_FileIO
+from io import TextIOBase as python_lib_io_TextIOBase
+from io import StringIO as python_lib_io_StringIO
+from time import struct_time as python_lib_time_StructTime
+import urllib.parse as python_lib_urllib_Parse
+
+
