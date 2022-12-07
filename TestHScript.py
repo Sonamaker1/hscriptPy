@@ -1,11 +1,10 @@
 
-from classes_hscript import Reflect, Sys
+from classes_hscript import Reflect, Sys, _hx_AnonObject
 from haxe import haxe_ds_EnumValueMap, haxe_ds_IntMap, haxe_ds_ObjectMap, haxe_ds_Option, haxe_ds_StringMap, haxe_unit_TestCase, haxe_unit_TestRunner
 from hscript import hscript_Bytes, hscript_Interp, hscript_Parser
 from python import python_Boot
 import globalClasses
-from _hx_AnonObject import _hx_AnonObject
-import _hx_AnonObject as anon
+
 class TestHScript(haxe_unit_TestCase):
     _hx_class_name = "TestHScript"
     __slots__ = ()
@@ -40,27 +39,6 @@ class TestHScript(haxe_unit_TestCase):
         ret = interp.execute(program)
         self.assertEquals(v,ret,pos)
 
-    def execute(self,x,v,vars = None,allowTypes = None,pos = None):
-        if (allowTypes is None):
-            allowTypes = False
-        p = hscript_Parser()
-        p.allowTypes = allowTypes
-        program = p.parseString(x)
-        _hx_bytes = hscript_Bytes.encode(program)
-        program = hscript_Bytes.decode(_hx_bytes)
-        interp = hscript_Interp()
-        if (vars is not None):
-            _g = 0
-            _g1 = python_Boot.fields(vars)
-            while (_g < len(_g1)):
-                v1 = (_g1[_g] if _g >= 0 and _g < len(_g1) else None)
-                _g = (_g + 1)
-                this1 = interp.variables
-                value = Reflect.field(vars,v1)
-                this1.h[v1] = value
-        ret = interp.execute(program)
-        print(ret)
-
     def test(self):
         self.assertScript("0",0,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 26, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("0xFF",255,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 27, 'className': "TestHScript", 'methodName': "test"}))
@@ -88,7 +66,7 @@ class TestHScript(haxe_unit_TestCase):
         self.assertScript("3 * 2 // + 5 \n + 6",12,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 58, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("3 /* 2\n */ + 5",8,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 59, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("[55,66,77][1]",66,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 60, 'className': "TestHScript", 'methodName': "test"}))
-        self.assertScript("var a = [55]; a[0] *= 2; return a[0]",110,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 61, 'className': "TestHScript", 'methodName': "test"}))
+        self.assertScript("var a = [55]; a[0] *= 2; a[0]",110,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 61, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("x",55,_hx_AnonObject({'x': 55}),None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 62, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("var y = 33; y",33,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 63, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("{ 1; 2; 3; }",3,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 64, 'className': "TestHScript", 'methodName': "test"}))
@@ -102,6 +80,7 @@ class TestHScript(haxe_unit_TestCase):
         self.assertScript("a = b = 3; a + b",6,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 72, 'className': "TestHScript", 'methodName': "test"}))
         def _hx_local_0(x,y):
             return (x + y)
+        
         self.assertScript("add(1,2)",3,_hx_AnonObject({'add': _hx_local_0}),None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 73, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("a.push(5); a.pop() + a.pop()",8,_hx_AnonObject({'a': [3]}),None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 74, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("if( true ) 1 else 2",1,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 75, 'className': "TestHScript", 'methodName': "test"}))
@@ -124,12 +103,6 @@ class TestHScript(haxe_unit_TestCase):
         self.assertScript("var i=0; if( i++ > 0 ) i=3; i",1,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 92, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("var a = 5/2; a",2.5,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 93, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("{ x = 3; x; }",3,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 94, 'className': "TestHScript", 'methodName': "test"}))
-        def _hx_local_TYPE(x):
-            from classes_hscript import Type
-            return Type(x)
-        #_hx_AnonObject({'Type': _hx_local_TYPE})
-        # self.execute("\"\nWhat type is { x = 3; x; }?:\"+Std.string(Type.typeof ({ x = 3; x; }))",6,anon.massiveAnon(),None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 72, 'className': "TestHScript", 'methodName': "test"}))
-         
         self.assertScript("{ x : 3, y : {} }.x",3,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 95, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("function bug(){ \n }\nbug().x",None,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 96, 'className': "TestHScript", 'methodName': "test"}))
         self.assertScript("1 + 2 == 3",True,None,None,_hx_AnonObject({'fileName': "TestHScript.hx", 'lineNumber': 97, 'className': "TestHScript", 'methodName': "test"}))
