@@ -1,3 +1,27 @@
+
+
+import math as python_lib_Math
+import math as Math
+import inspect as python_lib_Inspect
+from TestHScript import TestHScript
+import globalClasses
+
+from sys_hscript import sys_FileSystem
+
+from haxe import haxe_SysTools
+from haxe import haxe_ds_StringMap
+from haxe import haxe_xml_Parser
+from haxe import haxe_io_FPHelper
+from haxe import haxe__Int64____Int64
+
+from hscript import hscript_Async
+from hscript import hscript_Expr
+from hscript import hscript_Parser
+from python import python_Boot
+from python import python_Lib
+from classes_hscript import Enum, StringTools, Sys, Xml, _Xml_XmlType_Impl_
+
+
 class sys_io_FileSeek(Enum):
     __slots__ = ()
     _hx_class_name = "sys.io.FileSeek"
@@ -6,7 +30,7 @@ sys_io_FileSeek.SeekBegin = sys_io_FileSeek("SeekBegin", 0, ())
 sys_io_FileSeek.SeekCur = sys_io_FileSeek("SeekCur", 1, ())
 sys_io_FileSeek.SeekEnd = sys_io_FileSeek("SeekEnd", 2, ())
 sys_io_FileSeek._hx_class = sys_io_FileSeek
-_hx_classes["sys.io.FileSeek"] = sys_io_FileSeek
+globalClasses._hx_classes["sys.io.FileSeek"] = sys_io_FileSeek
 
 Math.NEGATIVE_INFINITY = float("-inf")
 Math.POSITIVE_INFINITY = float("inf")

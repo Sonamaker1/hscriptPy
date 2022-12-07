@@ -1,3 +1,0 @@
-class Bool: pass
-
-
